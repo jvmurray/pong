@@ -29,6 +29,8 @@ ball.shape('circle')
 ball.color('blue')
 ball.penup()
 ball.goto(0,0)
+ball.dx = .25
+ball.dy = .25
 
 #function
 def paddle_a_up():
@@ -64,3 +66,21 @@ window.onkeypress(paddle_b_down, 'h')
 #main game loop
 while True:
     window.update()
+
+    #move the ball
+    ball.setx(ball.xcor()+ball.dx)
+    ball.sety(ball.ycor()+ball.dy)
+    
+    #border checking
+    if ball.ycor()>=270 or ball.ycor()<=-270:
+        ball.dy=-ball.dy
+    if ball.xcor()>390 or ball.xcor()<-390:
+        ball.goto(0,0) 
+        ball.dx*=-1
+    #Paddle and ball collisions
+    if ball.xcor() > 340 and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() >paddle_b.ycor() -50):
+        ball.dx=-ball.dx
+    if ball.xcor() < -340 and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() >paddle_a.ycor() -50):
+        ball.dx=-ball.dx
+   #Paddle features: (-350,0), 20x100
+ 

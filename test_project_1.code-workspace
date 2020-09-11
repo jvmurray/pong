@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"uri": "vscode-remote://wsl+ubuntu/home/jvmurray"
+		},
+		{
+			"uri": "vscode-remote://wsl+ubuntu/home/jvmurray/src"
+		}
+	],
+	"remoteAuthority": "wsl+Ubuntu",
+	"settings": {}
+}
