@@ -31,7 +31,17 @@ ball.penup()
 ball.goto(0,0)
 ball.dx = .25
 ball.dy = .25
-
+#Score
+score_a=0
+score_b=0
+# Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("Blue")
+pen.penup()
+pen.hideturtle()
+pen.goto(0,260) 
+pen.write(f'Player A: {score_a}  Player B: {score_b}', align="center", font=("Courier", 24, "normal"))
 #function
 def paddle_a_up():
     y = paddle_a.ycor()
@@ -61,8 +71,8 @@ def paddle_b_down():
 window.listen()
 window.onkeypress(paddle_a_up, 'w')
 window.onkeypress(paddle_a_down, 's')
-window.onkeypress(paddle_b_up, 'y')
-window.onkeypress(paddle_b_down, 'h')
+window.onkeypress(paddle_b_up, 'Up')
+window.onkeypress(paddle_b_down, 'Down')
 #main game loop
 while True:
     window.update()
@@ -74,13 +84,20 @@ while True:
     #border checking
     if ball.ycor()>=270 or ball.ycor()<=-270:
         ball.dy=-ball.dy
-    if ball.xcor()>390 or ball.xcor()<-390:
+    if ball.xcor()>390: 
         ball.goto(0,0) 
         ball.dx*=-1
+        score_a+=1
+        pen.clear()
+        pen.write(f'Player A: {score_a}  Player B: {score_b}', align="center", font=("Courier", 24, "normal"))
+    if ball.xcor()<-390:
+        ball.goto(0,0) 
+        ball.dx*=-1
+        score_b+=1
+        pen.clear()
+        pen.write(f'Player A: {score_a}  Player B: {score_b}', align="center", font=("Courier", 24, "normal"))
     #Paddle and ball collisions
     if ball.xcor() > 340 and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() >paddle_b.ycor() -50):
         ball.dx=-ball.dx
     if ball.xcor() < -340 and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() >paddle_a.ycor() -50):
         ball.dx=-ball.dx
-   #Paddle features: (-350,0), 20x100
- 
